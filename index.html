@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Project 3 Survey</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags unless you know what you are doing -->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags unless you know what you are doing -->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    <!-- dynamic content scripts -->
+      <script src="//code.jquery.com/jquery-1.12.0.min.js" type="text/javascript"></script>
+    <!-- end dynamic content scripts -->
+    </head>
+
+    <body class="container">
+
+<!-- Start the default content -->
+<div id="default-content" class="dynamic-content">
+
+      <div id="jumbotron-top" class="jumbotron jumbotron-fluid  beforesignin">
+        <h2 id="title-message" class="title_message ">Survey</h2>
+        <div class="jumbotron-msg container push-spaces">
+          <p></div>
+        </div>
+
+<!-- ========= Authentication Container ============ -->
+      <!-- SIGN IN -->
+      <div id="signInModal" class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="form-title ">
+              <h3 class="sign-in-msg form-header">Log-In</h3>
+            </div>
+          </div>
+              <div class="auth-alert">
+                <h3 id="signInError" class="form-error" ></h3>
+              </div>
+              <div class="modal-body">
+
+        <form id="sign-in">
+          <div class="form-group blue-text">
+            <label for="name"> Email</label>
+            <input type="text" name="credentials[email]" class="form-control signInPaw" autocomplete="off" placeholder="Enter Email" required />
+           <label for="name">Password</label>
+           <input type="password" name="credentials[password]" class="form-control"  autocomplete="off" placeholder="Password" required />
+         </div>
+         <div class="padding">
+          <button type="submit" name="submit" value="SignIn" class="btn btn-primary btn-block"> Submit</button>
+        </div>
+      <div class="modal-footer"></div>
+      <div id="register" class="form-subtext register">
+        <p>Not Registered ?
+          <span id="sign-up-form" class="form-link"><a href='#'>Sign Up Here</a></span>
+        </p>
+      </div>
+      <div class="modal-footer"></div>
+          </form>
+      </div>
+        </div>
+      </div>
+
+
+      <!-- SIGN UP -->
+      <div id="signUpModal" class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="form-title mdl-card__title">
+              <h3 class="form-header">Create New Account</h3>
+            </div>
+              </div>
+              <div class="auth-alert">
+                <h3 id="signUpError" class="form-error"></h3>
+                <h3 id="signUpSuccess" class="form-success"></h3>
+              </div>
+              <div class="modal-body">
+                 <form id="sign-up">
+                   <div class="form-group blue-text">
+                    <label for="name">Email</label>
+                    <input type="text" name="credentials[email]" class="form-control" autocomplete="off" placeholder="Email" required />
+                    <label for="name">Password</label>
+                    <input id="password1" type="password" name="credentials[password]" class="form-control" autocomplete="off" placeholder="Password" required />
+                    <label for="name">Password Confirmation</label>
+                    <input id="password2" type="password" name="credentials[password_confirmation]" class="form-control" autocomplete="off" placeholder="Confirm Password" required />
+                     <!-- Password Validation (5/18) -->
+                    <span id="confirmMessage" class="confirmMessage"></span>
+                   </div>
+                   <!-- Password Validation (5/18) -->
+                   <button id="chpw-submit" type="submit" name="submit" value="SignUp" class="btn btn-primary btn-block">Submit</button>
+                   <div class="modal-footer"></div>
+                   <div class="form-subtext">
+                     <p>Did you get here on accident ?
+                       <span id="return-to-log-in" class="form-link"><a href='#'>Return to LogIn</a></span>
+                     </p>
+                   </div>
+                   <div class="modal-footer"></div>
+                 </form>
+              </div>
+        </div>
+      </div>
+<!-- Change Password Modal-->
+<!-- <div id="add-task-modal" class="container-fluid"> -->
+
+        <div id="changePasswordModal" class="modal fade container-fluid" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="form-title mdl-card__title">
+              <h3 class="form-header">Change Your Password</h3>
+            </div>
+          </div>
+
+          <div class="auth-alert">
+            <h3 id="ChangePasswordError" class="form-error"></h3>
+            <h3 id="ChangePasswordSuccess" class="form-success"></h3>
+          </div>
+          <div class="modal-body">
+          <form id="change-password">
+            <fieldset>
+              <div class="form-group-pw blue-text">
+               <label for="name">Old Password</label>
+               <input type="password" name="passwords[old]" class="form-control" autocomplete="off" placeholder="Old Password" required />
+               <label for="name">New Password</label>
+               <input type="password" name="passwords[new]" class="form-control" autocomplete="off" placeholder="New Password" required />
+
+               <div class="padding"></div>
+              <button id="changePasswordSubmit" type="submit" name="submit" value="Change Password" class="btn btn-primary btn-block">Change Password</button>
+            </div>
+            <div class="padding"></div>
+              <button id="changePasswordModalClose" type="button" class="btn btn-resolved btn-block" data-dismiss="modal">Close</button>
+              </fieldset>
+          </form>
+        </div>
+            </div>
+              </div>
+        </div>
+
+  <!-- Logout confirm-->
+
+  <div id="confirm-logout" class="modal fade confirm-logout-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-content modal-header">
+
+      <div class="form-title mdl-card__title">
+        <h3 class="form-header">Are you sure you want to Log out ?</h3>
+      </div>
+
+    <div class="modal-footer">
+      <button id="sign-out" type="submit"  name="submit" value="SignOut" class="btn btn-danger btn-sm  btn-block">SignOut</button>
+      <button type="button" data-dismiss="modal" class="btn btn-sm btn-block">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="nav-btns align-center">
+
+  <button id="LogOut" class='btn btn-primary align-center navbar-center ' type="submit" name="submit" value="SignOut" data-toggle="modal" data-target=".confirm-logout-modal"> SignOut</button>
+
+  <!-- <button id="sign-out" type="submit"  name="submit" value="SignOut" class="btn btn-primary align-center navbar-center">SignOut</button> -->
+  <button id="change-password-modal" type="button" class="btn btn-primary  navbar-center change-pw" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
+</div>
+
+<!-- END AUTHENTICATION MODALS  -->
+
+<div class="create-a-survey">
+  <button id="add-survey-button" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createSurvey">
+    Create Survey
+  </button>
+</div>
+
+<!-- <div class="update-a-survey">
+  <button id="update-survey-button" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#updateSurvey">
+    Modify Survey
+  </button>
+</div> -->
+
+<div class="get-surveys">
+  <button id="get-survey-button" class="btn btn-primary btn-lg" type="button"  data-target="#">
+    Get Surveys
+  </button>
+</div>
+
+<!-- Create Survey Modal -->
+
+</div>
+
+<!-- Create Survey Modal -->
+  <div id="createSurvey" class="modal fade container-fluid" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="form-title mdl-card__title">
+        <h3 class="form-header">Create Survey</h3>
+      </div>
+    </div>
+    <div class="modal-body">
+
+      <form id="create-survey" class="form-horizontal">
+        <fieldset>
+            <div class="input-group">
+              <div class="col-sm-12">
+                <span class="input-group-addon " id="survey-title">Survey Title</span>
+                <input type="text" name="survey[title]" id="title" class="form-control" placeholder="Enter Survey Title Here ..." aria-describedby="basic-addon1" required>
+              </div>
+
+              <div class="col-sm-12">
+                <span class="input-group-addon" id="survey-q1">Survey Question</span>
+                <input type="text" name="survey[question]" id="q1" class="form-control" placeholder="What is your question?" aria-describedby="basic-addon1" required>
+              </div>
+
+              <div class="col-sm-12">
+                <span class="input-group-addon" id="expected-response-type">Expected response type...</span>
+                <select id="response-type" name="survey[response_type]" class="form-control" required>
+                  <option value="" disabled  hidden>Select expected response type...</option>
+                  <option value="String">Text response</option>
+                  <option value="Boolean">Response of only "Yes" or "No"</option>
+                  <option value="Number">Rating Response : on a scale from 1 - 5</option>
+                </select>
+              </div>
+            </div>
+            <div class="padding"></div>
+
+            <button type="submit" class="btn btn-primary btn-block" id= "create_survey">Create Survey</button>
+            <div class="padding"></div>
+
+            <button type="button" class="btn btn-resolved btn-block" data-dismiss="modal">Close</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- End of Create Survey Modal -->
+
+
+
+    <div id="updateSurvey" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Update Survey</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <form id="update-survey">
+                <fieldset>
+                  <div class="form-group">
+                    <div class="col-sm-10 hideMe">
+                      <span class="input-group-addon"  id="survey-id"></span>
+                      <input type="text" name="survey[id]" id="surveyId" class="form-control" hidden placeholder="Survey ID" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="col-sm-10">
+                      <span class="input-group-addon"  id="survey-title"></span>
+                      <input type="text" name="survey[title]" id="surveyTitle" class="form-control" placeholder="Survey Title" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="col-sm-10">
+                        <span class="input-group-addon" id="survey-q1"></span>
+                      <input type="text" name="survey[question]" id="surveyQ1" class="form-control" placeholder="Question 1" aria-describedby="basic-addon1" required>
+                    </div>
+                  </div>
+                  <br>
+                  <button type="submit" class="btn btn-primary" id= "update_survey">Update Survey</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </fieldset>
+                <br>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- surveys content -->
+        <!-- surveys content -->
+          <div class="list-group" id ="surveys-content"></div>
+          <div class="list-group" id ="surveys-content-text"></div>
+        <!-- responses content -->
+          <div class="list-group" id ="responses-content"></div>
+          <div class="list-group" id ="responses-content-text"></div>
+
+</div>
+<!-- End of default-content -->
+
+<!-- Dynamic Content -->
+  <!-- Dynamic Section 3 -->
+  <!-- respondents handlebars -->
+  <div id="respondents" class="container col-md-12 dynamic-content">
+    <div id="jumbotron-top" class="jumbotron jumbotron-fluid">
+      <h2 id="title-message" class="title_message ">Survey Response</h2>
+      <h1 id="default-display-text" class="surveys-title"></h1>
+      <div class="jumbotron-msg container push-spaces">
+        <p></div>
+      </div>
+
+    <!-- <ol class="dynamic-content">
+    </ol> -->
+    <table class="table table-sm" id="response-list-table">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Response</th>
+          <th></th> <!-- for submit button -->
+        </tr>
+      </thead>
+
+      <tbody>
+          <tr>
+            <td id="survey_question"></td>
+          <!-- Create Response -->
+            <td id="survey_response">
+              <div class="input-group">
+                <form id="create-response" novalidate>
+                  <fieldset>
+
+                    <div id="res-number">
+                      <label>On a scale from 1 - 5 :    </label>
+                      <!-- <input id="response-text" type="number" min="1" max="5" step="1" maxlength="1" size="1" name="response[rating]" class="form-control" placeholder="Enter Your Response ..." required> -->
+                      <div <div class="w3-panel w3-border w3-border-red res-number-input">
+                      <input type="radio" name="response[rating]" value="1" required > 1
+                      <input type="radio" name="response[rating]" value="2" required > 2
+                      <input type="radio" name="response[rating]" value="3" required > 3
+                      <input type="radio" name="response[rating]" value="4" required > 4
+                      <input type="radio" name="response[rating]" value="5" required > 5
+                    </div>
+                    <div class="padding"></div>
+                    <input type="submit" disabled class="btn btn-primary" id= "res-number-create_response">
+                  </div>
+                </div>
+
+                    <div id="res-string">
+                      <label>Input your Answer : </label>
+                      <input id="responseq1" type="text" name="response[text]"  class="form-control res-string-input" placeholder="Response" aria-describedby="basic-addon1" required >
+                      <div class="padding"></div>
+                      <input type="submit" disabled class="btn btn-primary" id= "res-string-create_response">
+                    </div>
+
+                    <div id="res-boolean">
+                      <label>Select your Answer :</label><br>
+                      <label class="btn btn-lg response-btn-boolean" />
+                        <input type="radio" class="response-btn-boolean1" name="response[boolean]" value="true"  > YES
+                      </label>
+                      <label class="btn btn-lg response-btn-boolean">
+                        <input type="radio" class="response-btn-boolean2" name="response[boolean]" value="false" > NO
+                      </label>
+                      <div class="padding"></div>
+
+                      <input type="submit" disabled class="btn btn-primary" id= "res-boolean-create_response">
+                    </div>
+
+                    <!-- <td id="survey_response_button_col"> -->
+                      <!-- <input type="submit" disabled class="btn btn-primary" id= "create_response"> -->
+                    <!-- </td> -->
+                    <div class="errors-create-response" > </div>
+                  </fieldset>
+                </form>
+              </div>
+            </td>
+          <!-- End of Create Response -->
+          </tr>
+      </tbody>
+    </table>
+  </div>
+<!-- End of Dynamic Content -->
+
+    </body>
+</html>
